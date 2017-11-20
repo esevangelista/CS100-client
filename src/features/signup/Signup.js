@@ -1,5 +1,7 @@
 import React from 'react'
-import { Header, Grid, Button, Form, Segment, Card, Icon, Image } from 'semantic-ui-react'
+import { Header, Grid, Button, Form, Segment, Card, Icon, Image, Input } from 'semantic-ui-react'
+import profpic from '../../assets/profpics/defaultLul.jpg';
+
 
 const SignupForm = () => {
 
@@ -52,27 +54,12 @@ const SignupForm = () => {
         </Segment>
       </Grid.Column>
       <Grid.Column
+
       >
         <Card>
-          <Image src='matthew.png'/>
+          <Image src={profpic}/>
           <Card.Content>
-            <Card.Header>
-                Matthew
-            </Card.Header>
-            <Card.Meta>
-              <span className='date'>
-                Joined in 2015
-              </span>
-            </Card.Meta>
-            <Card.Description>
-              Matthew is a musician living in Nashville.
-            </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='user' />
-                22 Friends
-              </a>
+            <input type="file"/>
           </Card.Content>
         </Card>
       </Grid.Column>
