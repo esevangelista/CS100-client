@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Login from '../features/auth/Login';
-import Signup from '../features/signup/Signup';
+import SignupContainer from '../features/signup/SignupContainer';
 
 class App extends Component {
   render() {
     return (
       <div>
       {/* <Login /> */}
-      <Signup />
+      <SignupContainer />
       </div>
     );
   }
