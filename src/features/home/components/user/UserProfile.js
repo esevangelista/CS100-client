@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import image from '../../../../assets/profpics/somepicture.jpg';
 
-import './style.css'
+import '../style.css'
 
 class UserProfile extends Component {
     render(){
         return(
-            <Card>
+            <Card centered>
                 <Card.Content>
                     <Image className="userimg" floated="left" size="tiny" src={image} />
-                    <Card.Header textAlign="center">
+                    <Card.Header textAlign="center" style={{"font-size": 25, "margin-top": 20}}>
                         Harold Roxas
                     </Card.Header>
                 </Card.Content>

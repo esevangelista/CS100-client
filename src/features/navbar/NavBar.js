@@ -12,6 +12,7 @@ const trigger = (
 const NavBar = ({
     search,
     handleSearchChange,
+    logout,
     image,
 }) => (
     <Menu attached = 'top' tabular>
@@ -57,9 +58,9 @@ const NavBar = ({
                             <a href = '#'> Edit </a>
                         </Dropdown.Item>
                         <Dropdown.Item
-                            // onClick = {}
+                            onClick = {logout}
                             >
-                            <a href = '#'> Signout </a>
+                            <a href='/'> Sign Out </a>
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
