@@ -6,6 +6,7 @@ import UserProfile from './components/user/UserProfile';
 import UserPost from './components/feed/UserPost';
 import UserFeed from './components/feed/UserFeed';
 import UserSuggested from './components/suggested/UserSuggested';
+import UserFriendRequest from './UserFriendRequest'
 
 import './style.css';
 
@@ -18,8 +19,9 @@ class Home extends Component {
                         <UserProfile />
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <UserPost />
-                        <UserFeed />
+                        {/* <UserPost /> */}
+                        {/* <UserFeed /> */}
+                        <UserFriendRequest />
                     </Grid.Column>
                     <Grid.Column width={4}>
                         <UserSuggested />
