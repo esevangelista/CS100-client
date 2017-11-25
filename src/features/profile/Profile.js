@@ -2,19 +2,45 @@ import React, { Component } from 'react';
 import {Image, Icon, Card} from 'semantic-ui-react';
 import something from '../../assets/profpics/somepicture.jpg'
 
-class Profile extends Component{
-    constructor(props){
-        super(props);
+const array = [something, something, something, something, something, something]
+const name = 'Harold Roxas'
+const about = 'Lorem ipsum dolor sit amet'
 
-        this.state = {
-            images: 0
-        }
-    }
+class Profile extends Component{
 
     render(){
         return (
-            <Card>
-            </Card>
+            <div>
+                <Image src={something} size = 'large' circular/>
+                <br/>
+                <Card.Group itemsPerRow = {1} stackable>
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>{name}</Card.Header>
+                            
+                            <Card.Description>{about}</Card.Description>
+                        </Card.Content>
+                    </Card>
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>Friends</Card.Header>
+                            
+                            <Card.Description>
+                                {
+                                    array.map((image, index) => {
+                                        console.log('Here')
+                                        return(
+                                            <Image key = {index} src={image} size = 'tiny'/>
+                                        )
+                                    })
+                                }
+                            </Card.Description>
+                        </Card.Content>
+                    </Card>
+                </Card.Group>
+            </div>
             )
     }
 }
+
+export default Profile;
