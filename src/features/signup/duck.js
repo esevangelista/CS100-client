@@ -4,6 +4,8 @@
 
 
 const FORMCHANGE = 'FORM_CHANGE';
+const RESETFORM = 'FORM_RESET';
+const UPLOADPICTURE = 'UPLOAD_PICTURE';
 
 // Action Creators
 // Examples:
@@ -27,6 +29,25 @@ export const handleFormChange = (name, newValue) => {
     }
 }
 
+export const handleResetForm = () => {
+    return {
+        type: RESETFORM,
+        payload: {
+            
+        }
+    }
+}
+
+export const handleUploadPicture = (name, newValue) => {
+    return {
+        type: UPLOADPICTURE,
+        payload: {
+            name,
+            newValue
+        }
+    }
+}
+
 // Initial State
 const initialState = {
 
@@ -36,7 +57,8 @@ const initialState = {
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        repassword: "",
+        pictureLocation: ""
     }
 
 };
@@ -64,6 +86,26 @@ const reducer = (state = initialState, action) => {
                     [payload.name]: payload.value,
                 }
             }
+        case RESETFORM:
+            return {
+                form: {
+                    firstName: "",
+                    middleName: "",
+                    lastName: "",
+                    email: "",
+                    password: "",
+                    repassword: ""
+                }
+            }
+        case UPLOADPICTURE:
+            return {
+                ...state,
+                form: {
+                    [payload.name]: payload.value,
+                }
+            }
+
+        
         default:
             return state;
     }

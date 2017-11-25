@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Signup from './Signup';
-import { handleFormChange } from './duck';
+import { handleFormChange, handleResetForm } from './duck';
 
 
 const mapStateToProps = state => {
@@ -14,6 +14,9 @@ const mapDispatchToProps = dispatch => {
     return {
         handleFormChange: (name, value) => {
             dispatch(handleFormChange(name, value))
+        },
+        handleResetForm: () => {
+            dispatch(handleResetForm())
         }
     }
 };

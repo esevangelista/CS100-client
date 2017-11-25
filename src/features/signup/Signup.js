@@ -10,6 +10,18 @@ class Signup extends Component {
 
   }
 
+  handleResetForm = (e) => {
+
+    this.props.handleResetForm();
+
+  }
+
+  handleUploadPicture = (e) => {
+
+    this.props.handleResetForm();
+
+  }
+
   render(){
     return (
       <Grid 
@@ -88,7 +100,12 @@ class Signup extends Component {
               />
             </Form.Field>
             <Button color='teal' type='submit'>Submit</Button>
-            <Button type='submit'>Clear Fields</Button>
+            <Button 
+              type='submit'
+              onClick={this.handleResetForm}
+            >
+              Clear Fields
+            </Button>
           </Form>
           </Segment>
         </Grid.Column>
@@ -96,8 +113,13 @@ class Signup extends Component {
         >
           <Card>
             <Image src={profpic}/>
-            <Card.Content>
-              <input type="file"/>
+            <Card.Content extra>
+              <div>
+                <label for="hidden-new-file" class="ui icon button">
+                  Upload Photo
+                </label>
+                  <input type="file" id="hidden-new-file" style={{display: "none"}}/> 
+              </div>
             </Card.Content>
           </Card>
         </Grid.Column>
