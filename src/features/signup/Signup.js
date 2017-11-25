@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Header, Grid, Button, Form, Segment, Card, Image } from 'semantic-ui-react'
+import { Header, Grid, Button, Form, Segment, Card, Image, TextArea } from 'semantic-ui-react'
 import profpic from '../../assets/profpics/defaultLul.jpg';
 
 class Signup extends Component {
 
   handleFormChange = (e) => {
-
     this.props.handleFormChange(e.target.name, e.target.value);
 
   }
@@ -19,6 +18,32 @@ class Signup extends Component {
   handleUploadPicture = (e) => {
 
     this.props.handleResetForm();
+
+  }
+
+  handleSubmitForm = (e) => {
+
+    const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    console.log(this.props.form.firstName);
+
+
+    if(
+      this.props.form.firstName === "" ||
+      this.props.form.middleName === "" ||
+      this.props.form.lastName === "" ||
+      this.props.form.email === "" ||
+      this.props.form.password === "" ||
+      this.props.form.repassword === "" ){
+        alert("All fields must be filled.");
+    }
+
+    else if (!validateEmail.test(this.props.form.email)){
+      alert("Please enter a valid email.");
+    }
+
+    else if (this.props.form.password !== this.props.form.repassword){
+      alert("Passwords don't match.");
+    }
 
   }
 
@@ -86,6 +111,7 @@ class Signup extends Component {
               <input 
                 placeholder='Password'
                 name='password'
+                type='password'
                 value={this.props.form.password}
                 onChange={this.handleFormChange}
               />
@@ -95,11 +121,28 @@ class Signup extends Component {
               <input 
                 placeholder='Retype Password' 
                 name='repassword'
+                type='password'
                 value={this.props.form.repassword}
                 onChange={this.handleFormChange}
               />
             </Form.Field>
-            <Button color='teal' type='submit'>Submit</Button>
+            <Form.Field >
+              <label>Tell us about yourself (Optional)</label>
+              <TextArea
+                autoHeight
+                placeholder='Tell us' 
+                name='about'
+                value={this.props.form.about}
+                onChange={this.handleFormChange}
+              />
+            </Form.Field>
+            <Button 
+              color='teal' 
+              type='submit'
+              onClick={this.handleSubmitForm}
+            >
+              Submit
+            </Button>
             <Button 
               type='submit'
               onClick={this.handleResetForm}

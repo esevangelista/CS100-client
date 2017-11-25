@@ -2,10 +2,10 @@
 // const FEATURE = 'DOMAIN/FEATURE';
 // Example: const LOGIN = 'AUTH/LOGIN';
 
-
 const FORMCHANGE = 'FORM_CHANGE';
 const RESETFORM = 'FORM_RESET';
 const UPLOADPICTURE = 'UPLOAD_PICTURE';
+const SUBMITFORM = 'FORM_SUBMIT';
 
 // Action Creators
 // Examples:
@@ -19,12 +19,12 @@ const UPLOADPICTURE = 'UPLOAD_PICTURE';
 //   }
 // };
 
-export const handleFormChange = (name, newValue) => {
+export const handleFormChange = (name, value) => {
     return {
         type: FORMCHANGE,
         payload: {
             name,
-            newValue
+            value
         }
     }
 }
@@ -38,12 +38,20 @@ export const handleResetForm = () => {
     }
 }
 
-export const handleUploadPicture = (name, newValue) => {
+export const handleUploadPicture = (name, value) => {
     return {
         type: UPLOADPICTURE,
         payload: {
             name,
-            newValue
+            value
+        }
+    }
+}
+
+export const handleSubmitForm = () => {
+    return{ 
+        type: SUBMITFORM,
+        payload: {
         }
     }
 }
@@ -55,40 +63,32 @@ const initialState = {
         firstName: "",
         middleName: "",
         lastName: "",
+        fullName: "",
         email: "",
+        about: "",
         password: "",
         repassword: "",
         pictureLocation: ""
     }
 
-};
+}
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
-
+    console.log(state);
     switch (type) {
-        // Include all action types here as switch case.
-        // Example with redux-pack:
-        // case LOGIN:
-        //   return handle(state, action, { // you will be needing to import { handle } from 'redux-pack';
-        //     start: prevState => ({
-        //       ...prevState,
-        //       // state mutations
-        //     }),
-        //     success: prevState => ({}),
-        //     failure: prevState => ({}),
-        //     finish: prevState => ({}),
-        //   });
         case FORMCHANGE:
-            return {
-                ...state,
-                form: {
-                    [payload.name]: payload.value,
-                }
+        return {
+            ...state,
+            form: {
+                ...state.form,
+                [payload.name]: payload.value,
+                fullName: state.form.firstName + " " + state.form.middleName + " " + state.form.lastName,
             }
+        }
         case RESETFORM:
             return {
-                form: {
+                form: { 
                     firstName: "",
                     middleName: "",
                     lastName: "",
@@ -104,8 +104,14 @@ const reducer = (state = initialState, action) => {
                     [payload.name]: payload.value,
                 }
             }
-
-        
+        case SUBMITFORM:
+            console.log(state);
+            return {
+                ...state,
+                form: {
+                    [payload.name]: payload.value,
+                }
+            }
         default:
             return state;
     }
