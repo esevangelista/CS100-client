@@ -1,0 +1,13 @@
+.userimg {
+    border-radius: 50%;
+}
+
+.stats {
+    font-size: 20px;
+    text-align: center;
+}
+
+.postCount {
+    float: left;
+    margin-left: 40px;
+}

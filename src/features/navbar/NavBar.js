@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Dropdown, Input, Image, Icon, Header } from 'semantic-ui-react';
-import something from './somepicture.jpg'
+import something from '../../assets/profpics/somepicture.jpg'
 
 const trigger = (
     <div>

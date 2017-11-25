@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getSession = () => {
-    return axios.post('/api/session');
+    return axios.get('/api/session');
 }
 
 export const login = credentials => {

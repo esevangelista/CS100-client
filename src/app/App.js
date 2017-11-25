@@ -10,7 +10,9 @@ import {
 import './App.css';
 
 import Login from '../features/auth/login/LoginContainer';
+import SignUp from '../features/signup/SignupContainer';
 import Loading from '../features/auth/loader/Loading';
+import NavBar from '../features/navbar/NavBarContainer';
 import Home from '../features/home/Home';
 
 class App extends Component {
@@ -26,10 +28,12 @@ class App extends Component {
         ) : !this.props.user ? (
           <Switch>
             <Route exact path="/" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
             <Redirect to="/" />
           </Switch>
         ) : (
           <div>
+            <NavBar />
             <Home />
           </div>
         )}
