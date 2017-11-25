@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, Dropdown, Input, Image, Icon, Header } from 'semantic-ui-react';
 import something from '../../assets/profpics/somepicture.jpg'
 
@@ -16,13 +17,13 @@ const NavBar = ({
     image,
 }) => (
     <Menu attached = 'top' tabular>
-        <Menu.Item> 
-            <a href = '#'>Home</a>
+        <Menu.Item as={Link} to='/'> 
+            <h4 style={{'color':'teal'}}>Home</h4>
         </Menu.Item>
-        <Menu.Item>
-            <a href = '#'>Friend Requests</a>
+        <Menu.Item as={Link} to='/'>
+            <h4 style={{'color':'teal'}}>Friend Requests</h4>
         </Menu.Item>
-        <Menu.Item position = 'right'>
+        <Menu.Item as={Link} to='/' position = 'right'>
             <Header as='h3' color='teal' textAlign='left'>
                 Ping Pong
             </Header>
@@ -47,20 +48,14 @@ const NavBar = ({
             <Menu.Item>
                 <Dropdown trigger={trigger} icon ={null}>
                     <Dropdown.Menu>
-                        <Dropdown.Item
-                            // onClick = {}
-                            >
-                            <a href = '#'> Profile </a>
+                        <Dropdown.Item as={Link} to='/profile'>
+                            Profile
                         </Dropdown.Item>
-                        <Dropdown.Item
-                            // onClick = {}
-                            >
-                            <a href = '#'> Edit </a>
+                        <Dropdown.Item as={Link} to='/editprofile'>
+                            Edit
                         </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick = {logout}
-                            >
-                            <a href='/'> Sign Out </a>
+                        <Dropdown.Item as={Link} to='/' onClick={logout}>
+                            Sign Out
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>

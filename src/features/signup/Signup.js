@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom';
 import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } from 'semantic-ui-react'
 import profpic from '../../assets/profpics/defaultLul.jpg';
 
@@ -152,7 +153,7 @@ class Signup extends Component {
           </Form>
           </Segment>
           <Message>
-            Already have an account? <a href='/login'>Log in</a>
+            Already have an account? <Link to='/login'>Log in</Link>
           </Message>
         </Grid.Column>
         <Grid.Column

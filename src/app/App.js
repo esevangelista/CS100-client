@@ -14,6 +14,7 @@ import SignUp from '../features/signup/SignupContainer';
 import Loading from '../features/auth/loader/Loading';
 import NavBar from '../features/navbar/NavBarContainer';
 import Home from '../features/home/Home';
+import Profile from '../features/profile/Profile';
 
 class App extends Component {
   componentDidMount() {
@@ -33,8 +34,12 @@ class App extends Component {
           </Switch>
         ) : (
           <div>
-            <NavBar />
-            <Home />
+            <NavBar logout={this.props.handleLogout}/>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/profile" component={Profile} />
+              <Redirect to="/" />
+            </Switch>
           </div>
         )}
       </Router>

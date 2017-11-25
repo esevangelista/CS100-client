@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import { Card, Image } from 'semantic-ui-react';
 import image from '../../../../assets/profpics/somepicture.jpg';
 
@@ -10,7 +10,7 @@ class UserProfile extends Component {
         return(
             <Card centered>
                 <Card.Content>
-                    <Image className="userimg" floated="left" size="tiny" src={image} />
+                    <Image as={Link} to='/profile' circular floated="left" size="tiny" src={image} />
                     <Card.Header textAlign="center" style={{"font-size": 25, "margin-top": 20}}>
                         Harold Roxas
                     </Card.Header>
