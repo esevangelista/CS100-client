@@ -12,7 +12,7 @@ import './App.css';
 import Login from '../features/auth/login/LoginContainer';
 import SignUp from '../features/signup/SignupContainer';
 import Loading from '../features/auth/loader/Loading';
-import NavBar from '../features/navbar/NavBar';
+import NavBar from '../features/navbar/NavBarContainer';
 import Home from '../features/home/Home';
 
 class App extends Component {
@@ -33,10 +33,8 @@ class App extends Component {
           </Switch>
         ) : (
           <div>
-            <NavBar logout={this.props.handleLogout} />
-            <Switch>
-              <Home />
-            </Switch>
+            <NavBar />
+            <Home />
           </div>
         )}
       </Router>
