@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Header, Grid, Button, Form, Segment, Card, Image, TextArea } from 'semantic-ui-react'
+import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } from 'semantic-ui-react'
 import profpic from '../../assets/profpics/defaultLul.jpg';
 
 class Signup extends Component {
@@ -70,7 +70,7 @@ class Signup extends Component {
             color='teal'
             textAlign='center'
           >
-          Social Media App
+          <a href='/'style={{color: "teal"}}>Social Media App</a>
         </Header>
           <Segment>
           <Form>
@@ -151,6 +151,9 @@ class Signup extends Component {
             </Button>
           </Form>
           </Segment>
+          <Message>
+            Already have an account? <a href='/login'>Log in</a>
+          </Message>
         </Grid.Column>
         <Grid.Column
         >

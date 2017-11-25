@@ -27,7 +27,8 @@ const Login = ({
       </Grid.Column>
       <Grid.Column style={{ maxWidth: 350 }}>
         <Form size='large' warning={Boolean(loginError)} error={Boolean(loginError)}
-        onSubmit={() => {
+        onSubmit={e => {
+          e.preventDefault();
           handleLogin({email, password});
         }}>
           {hasTriedLoggingIn && loginError.status === 422 && (
@@ -68,7 +69,7 @@ const Login = ({
                 handleChangePassword(e.target.value);
               }}
             />
-            <Button color='teal' type="submit" fluid size='large'>Login</Button>
+            <Button disabled={!(email && password)} color='teal' type="submit" fluid size='large'>Login</Button>
           </Segment>
         </Form>
         <Message>
