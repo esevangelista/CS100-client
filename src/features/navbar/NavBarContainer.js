@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import NavBar from './NavBar';
-import {changeTab, changeSearch, getSearch} from './duck';
+import { changeSearch, getSearch} from './duck';
 
 const mapStateToProps = state => {
-    const { search, activeTab }  = state.navbar;
+    const { search }  = state.navbar;
 
     return {
         search,
-        activeTab
     };
 };
 
@@ -15,9 +14,6 @@ const mapDispatchToProps = dispatch => {
   return {
     handleSearchChange: search => {
       dispatch(changeSearch(search));
-    },
-    handleTabChange: tab => {
-      dispatch(changeTab(tab));
     },
     handleGetSearch: name => {
       dispatch(getSearch(name));

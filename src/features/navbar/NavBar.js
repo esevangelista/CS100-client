@@ -11,10 +11,10 @@ const NavBar = ({
     image,
 }) => (
     <Menu attached = 'top' tabular>
-        <Menu.Item as={Link} to='/' onClick={handleTabChange('Home')}> 
+        <Menu.Item as={Link} to='/'> 
             <h4 style={{'color':'teal'}}>Home</h4>
         </Menu.Item>
-        <Menu.Item as={Link} to='/' onClick={handleTabChange('Friend Request')}>
+        <Menu.Item as={Link} to='/'>
             <h4 style={{'color':'teal'}}>Friend Requests</h4>
         </Menu.Item>
         <Menu.Item as={Link} to='/' position = 'right'>
