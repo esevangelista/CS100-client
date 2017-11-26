@@ -28,17 +28,7 @@ class Signup extends Component {
     console.log(this.props.form.firstName);
 
 
-    if(
-      this.props.form.firstName === "" ||
-      this.props.form.middleName === "" ||
-      this.props.form.lastName === "" ||
-      this.props.form.email === "" ||
-      this.props.form.password === "" ||
-      this.props.form.repassword === "" ){
-        alert("All fields must be filled.");
-    }
-
-    else if (!validateEmail.test(this.props.form.email)){
+    if (!validateEmail.test(this.props.form.email)){
       alert("Please enter a valid email.");
     }
 
@@ -140,16 +130,8 @@ class Signup extends Component {
             <Button 
               color='teal' 
               type='submit'
-              onClick={this.handleSubmitForm}
-            >
-              Submit
-            </Button>
-            <Button 
-              type='submit'
-              onClick={this.handleResetForm}
-            >
-              Clear Fields
-            </Button>
+              onClick={this.handleSubmitForm}>Submit</Button>
+            <Button type='submit'onClick={this.handleResetForm}>Clear Fields</Button>
           </Form>
           </Segment>
           <Message>

@@ -15,6 +15,7 @@ import Loading from '../features/auth/loader/Loading';
 import NavBar from '../features/navbar/NavBarContainer';
 import Home from '../features/home/HomeContainer';
 import Profile from '../features/profile/Profile';
+import EditProfile from '../features/editprofile/EditProfileContainer';
 
 class App extends Component {
   componentDidMount() {
@@ -38,6 +39,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/editprofile" component={EditProfile} />
               <Redirect to="/" />
             </Switch>
           </div>

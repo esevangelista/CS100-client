@@ -2,22 +2,12 @@
 // const FEATURE = 'DOMAIN/FEATURE';
 // Example: const LOGIN = 'AUTH/LOGIN';
 
+const defaultPicture = 'routeToDefPic';
+
 const FORMCHANGE = 'FORM_CHANGE';
 const RESETFORM = 'FORM_RESET';
 const UPLOADPICTURE = 'UPLOAD_PICTURE';
 const SUBMITFORM = 'FORM_SUBMIT';
-
-// Action Creators
-// Examples:
-// Action Creators with redux-pack and thunk
-// export const login = credentials => {
-//   return dispatch => { // dispatch provided by thunk middleware
-//     return dispatch({
-//       type: LOGIN,
-//       promise: Api.Login(credentials) // with redux-pack
-//     });
-//   }
-// };
 
 export const handleFormChange = (name, value) => {
     return {
@@ -38,7 +28,7 @@ export const handleResetForm = () => {
     }
 }
 
-export const handleUploadPicture = (name, value) => {
+export const handleFileUpload = (name, value) => {
     return {
         type: UPLOADPICTURE,
         payload: {
@@ -68,12 +58,14 @@ const initialState = {
         about: "",
         password: "",
         repassword: "",
-        pictureLocation: ""
+        image: "",
+        currentImage: defaultPicture,
     }
 }
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
+    console.log("EDIT: " + state);
     switch (type) {
         case FORMCHANGE:
         return {
@@ -90,7 +82,9 @@ const reducer = (state = initialState, action) => {
                     firstName: "",
                     middleName: "",
                     lastName: "",
+                    name: "",
                     email: "",
+                    about: "",
                     password: "",
                     repassword: ""
                 }
@@ -102,14 +96,7 @@ const reducer = (state = initialState, action) => {
                     [payload.name]: payload.value,
                 }
             }
-        case SUBMITFORM:
-            console.log(state);
-            return {
-                ...state,
-                form: {
-                    [payload.name]: payload.value,
-                }
-            }
+
         default:
             return state;
     }
