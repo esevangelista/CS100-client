@@ -2,12 +2,18 @@
     border-radius: 50%;
 }
 
-.stats {
+.stats, .statscount {
     font-size: 20px;
     text-align: center;
+    margin-left: 50px;
+}
+
+.statscount {
+    color: teal;
+    margin-left: 55px;
+    margin-top: 5px;
 }
 
 .postCount {
     float: left;
-    margin-left: 40px;
 }

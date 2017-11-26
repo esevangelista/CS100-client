@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Dropdown, Input, Image, Icon, Header } from 'semantic-ui-react';
 import something from '../../assets/profpics/somepicture.jpg'

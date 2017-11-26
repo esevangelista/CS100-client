@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Image, Icon, Card} from 'semantic-ui-react';
+import {Image, Card} from 'semantic-ui-react';
 import something from '../../../../assets/profpics/somepicture.jpg'
 
 const array = [something, something, something, something, something, something]

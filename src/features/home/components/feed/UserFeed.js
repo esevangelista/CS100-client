@@ -8,66 +8,32 @@ class UserFeed extends Component {
         return(
             <Segment>
                 <Feed>
-                    <Feed.Event>
-                        <Feed.Label image={image} />
-                        <Feed.Content>
-                            <Feed.Summary>
-                                <Feed.User content="Harold Roxas" />
-                                <Feed.Date content="1h" />
-                            </Feed.Summary>
-                            <Feed.Extra images text content="Hello World!" />
-                            <Feed.Meta>
-                                <Feed.Like>
-                                    20
-                                    <Icon name="like" />
-                                </Feed.Like>
-                                <Feed.Like>
-                                    15
-                                    <Icon name="comment" />
-                                </Feed.Like>
-                            </Feed.Meta>
-                        </Feed.Content>
-                    </Feed.Event>
-                    <Feed.Event>
-                        <Feed.Label image={image} />
-                        <Feed.Content>
-                            <Feed.Summary>
-                                <Feed.User content="Harold Roxas" />
-                                <Feed.Date content="1h" />
-                            </Feed.Summary>
-                            <Feed.Extra images text content="Hello World!" />
-                            <Feed.Meta>
-                                <Feed.Like>
-                                    20
-                                    <Icon name="like" />
-                                </Feed.Like>
-                                <Feed.Like>
-                                    15
-                                    <Icon name="comment" />
-                                </Feed.Like>
-                            </Feed.Meta>
-                        </Feed.Content>
-                    </Feed.Event>
-                    <Feed.Event>
-                        <Feed.Label image={image} />
-                        <Feed.Content>
-                            <Feed.Summary>
-                                <Feed.User content="Harold Roxas" />
-                                <Feed.Date content="1h" />
-                            </Feed.Summary>
-                            <Feed.Extra images text content="Hello World!" />
-                            <Feed.Meta>
-                                <Feed.Like>
-                                    20
-                                    <Icon name="like" />
-                                </Feed.Like>
-                                <Feed.Like>
-                                    15
-                                    <Icon name="comment" />
-                                </Feed.Like>
-                            </Feed.Meta>
-                        </Feed.Content>
-                    </Feed.Event>
+                    {
+                        this.props.feeds.map((feed, index) => {
+                            return(
+                                <Feed.Event key={index}>
+                                <Feed.Label image={image} />
+                                <Feed.Content>
+                                    <Feed.Summary>
+                                        <Feed.User content="Harold Roxas" />
+                                        <Feed.Date content="1h" />
+                                    </Feed.Summary>
+                                    <Feed.Extra images text content={feed.content} />
+                                    <Feed.Meta>
+                                        <Feed.Like>
+                                            {feed.likeCount}
+                                            <Icon name="like" />
+                                        </Feed.Like>
+                                        <Feed.Like>
+                                            {feed.comments.length}
+                                            <Icon name="comment" />
+                                        </Feed.Like>
+                                    </Feed.Meta>
+                                </Feed.Content>
+                                </Feed.Event>
+                            )
+                        })
+                    }   
                 </Feed>
             </Segment>
         );

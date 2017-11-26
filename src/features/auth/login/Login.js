@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
 import '../style.css';
 
@@ -22,7 +22,6 @@ const Login = ({
     >
       <Grid.Column>
         <Header as='h1' color='teal' textAlign='left'>
-          {/* <Image src='/logo.png' /> */}
           Ping Pong
         </Header>
       </Grid.Column>

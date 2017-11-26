@@ -13,7 +13,7 @@ import Login from '../features/auth/login/LoginContainer';
 import SignUp from '../features/signup/SignupContainer';
 import Loading from '../features/auth/loader/Loading';
 import NavBar from '../features/navbar/NavBarContainer';
-import Home from '../features/home/Home';
+import Home from '../features/home/HomeContainer';
 import Profile from '../features/profile/Profile';
 
 class App extends Component {

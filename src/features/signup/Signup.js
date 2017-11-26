@@ -24,7 +24,7 @@ class Signup extends Component {
 
   handleSubmitForm = (e) => {
 
-    const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const validateEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     console.log(this.props.form.firstName);
 
 
