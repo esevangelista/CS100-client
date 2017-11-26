@@ -5,6 +5,8 @@ import { Menu, Dropdown, Input, Image, Icon, Header } from 'semantic-ui-react';
 const NavBar = ({
     search,
     handleSearchChange,
+    handleTabChange,
+    handleGetSearch,
     logout,
     image,
 }) => (
@@ -28,7 +30,8 @@ const NavBar = ({
                 icon={<Icon
                         name = 'search'
                         link = 'true'
-                        // onClick = {}
+                        // as={Link} to='/search/:search'
+                        onClick = {handleGetSearch(search)}
                     />}
                 placeholder='Search Users'
                 value = {search}
