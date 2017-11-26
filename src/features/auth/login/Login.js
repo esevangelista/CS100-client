@@ -21,9 +21,13 @@ const Login = ({
       columns="2"
     >
       <Grid.Column>
-        <Header as='h1' color='teal' textAlign='left'>
-          Ping Pong
+        <Header as='h1'textAlign='left'>
+          <div class = 'white'>Ping Pong</div>
         </Header>
+        <div class = 'white'> 
+        Ping your stories, Pong your replies, and Pang the PingPongs you like.
+        <br/>Introducing, Ping Pong, your not so new social media site.
+        </div>
       </Grid.Column>
       <Grid.Column style={{ maxWidth: 350 }}>
         <Form size='large' warning={Boolean(loginError)} error={Boolean(loginError)}
