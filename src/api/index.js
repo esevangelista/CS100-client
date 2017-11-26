@@ -6,3 +6,4 @@
 // this with `import * as Api from '../../api';`
 
 export * from './auth';
+export * from './navbar';

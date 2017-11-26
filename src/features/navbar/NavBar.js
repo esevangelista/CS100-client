@@ -13,14 +13,16 @@ const trigger = (
 const NavBar = ({
     search,
     handleSearchChange,
+    handleTabChange,
+    handleGetSearch,
     logout,
     image,
 }) => (
     <Menu attached = 'top' tabular>
-        <Menu.Item as={Link} to='/'> 
+        <Menu.Item as={Link} to='/' onClick={handleTabChange('Home')}> 
             <h4 style={{'color':'teal'}}>Home</h4>
         </Menu.Item>
-        <Menu.Item as={Link} to='/'>
+        <Menu.Item as={Link} to='/' onClick={handleTabChange('Friend Request')}>
             <h4 style={{'color':'teal'}}>Friend Requests</h4>
         </Menu.Item>
         <Menu.Item as={Link} to='/' position = 'right'>
@@ -36,7 +38,8 @@ const NavBar = ({
                 icon={<Icon
                         name = 'search'
                         link = 'true'
-                        // onClick = {}
+                        // as={Link} to='/search/:search'
+                        onClick = {handleGetSearch(search)}
                     />}
                 placeholder='Search Users'
                 value = {search}
