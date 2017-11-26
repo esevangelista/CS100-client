@@ -26,13 +26,23 @@ class Home extends Component {
                         <UserProfile user={this.props.user} postCount={this.props.postCount} friendCount={this.props.friendCount}/>
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <UserPost image={this.props.user.imageUrl} />
+                        <UserPost 
+                            image={this.props.user.imageUrl} 
+                            content={this.props.content}
+                            handleChangePost={this.props.handleChangePost}
+                            handlePost={this.props.handlePost}
+                        />
                         {this.props.getPostError ? (
                             <Message 
                                 content={this.props.getPostError.message}
                             />
                         ) : (
-                            <UserFeed feeds={this.props.feed}/>
+                            <UserFeed
+                                feeds={this.props.feed}
+                                handleGetUser={this.props.handleGetUser}
+                                someUser={this.props.someUser}
+                                handleLikePost={this.props.handleLikePost}
+                            />
                         )}
                     </Grid.Column>
                     <Grid.Column width={4}>

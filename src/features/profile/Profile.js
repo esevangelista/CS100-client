@@ -8,12 +8,20 @@ import UserSuggested from '../home/components/suggested/UserSuggested';
 import './style.css';
 
 class Profile extends Component {
+    componentDidMount(){
+        this.props.handleGetUserPosts(this.props.user._id);
+        this.props.handleGetFriends();
+    }
+
     render(){
         return(
             <div className="page">
                 <Grid columns={3} padded>
                     <Grid.Column width={4} style={{"margin-left": 40}}>
-                        <ProfileInfo user={this.props.user}/>
+                        <ProfileInfo
+                            user={this.props.user}
+                            friends={this.props.friends}
+                        />
                     </Grid.Column>
                     <Grid.Column width={7}>
                         {this.props.getPostError ? (
@@ -21,7 +29,11 @@ class Profile extends Component {
                                 content={this.props.getPostError.message}
                             />
                         ) : (
-                            <UserFeed feeds={this.props.feed}/>
+                            <UserFeed
+                                feeds={this.props.feed}
+                                handleGetUser={this.props.handleGetUser}
+                                someUser={this.props.someUser}
+                            />
                         )}
                     </Grid.Column>
                     <Grid.Column width={4}>

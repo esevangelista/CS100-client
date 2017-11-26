@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
 import Home from './Home';
 
-import { getPosts, getPostCount, getFriendCount } from './duck';
+import { getPosts, getPostCount, getFriendCount, post, changePost, getUser, likePost } from './duck';
 
 const mapStateToProps = state => {
     const { user } = state.auth;
-    const { isGettingPosts, getPostError, feed, postCount, friendCount } = state.home;
+    const { getPostError, feed, postCount, friendCount, content, someUser } = state.home;
 
     return {
         user,
-        isGettingPosts,
         getPostError,
         feed,
         postCount,
-        friendCount
+        friendCount,
+        content,
+        someUser
     };
 };
 
@@ -27,6 +28,18 @@ const mapDispatchToProps = dispatch => {
         },
         handleGetFriendCount: () => {
             dispatch(getFriendCount());
+        },
+        handleChangePost: content => {
+            dispatch(changePost(content));
+        },
+        handlePost: content => {
+            dispatch(post(content));
+        },
+        handleGetUser: id => {
+            dispatch(getUser(id))
+        },
+        handleLikePost: (id, action) => {
+            dispatch(likePost(id, action))
         }
     };
 };

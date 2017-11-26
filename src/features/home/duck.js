@@ -6,6 +6,9 @@ const GET_POSTS = 'HOME/GET_POSTS';
 const GET_POSTCOUNT = 'HOME/GET_POSTCOUNT';
 const GET_FRIENDCOUNT = 'HOME/GET_FRIENDCOUNT'
 const POST = 'HOME/POST';
+const CHANGE_POST = 'HOME/CHANGE_POST';
+const GET_USER = 'HOME/GET_USER';
+const LIKE_POST = 'HOME/LIKE_POST';
 
 //Action Creators
 export const getPosts = () => {
@@ -35,13 +38,53 @@ export const getFriendCount = () => {
     };
 };
 
+export const post = content => {
+    console.log(content);
+    return dispatch => {
+        return dispatch({
+            type: POST,
+            promise: Api.post(content)
+        });
+    };
+};
+
+export const changePost = content => {
+    return {
+        type: CHANGE_POST,
+        payload: content
+    }
+}
+
+export const getUser = id => {
+    return dispatch => {
+        return dispatch({
+            type: GET_USER,
+            promise: Api.getUser(id)
+        });
+    };
+};
+
+export const likePost = (id, action) => {
+    return dispatch => {
+        return dispatch({
+            type: LIKE_POST,
+            promise: Api.likePost(id, action)
+        });
+    };
+};
+
 //Initial State
 const initialState = {
+    content: '',
+    isPosting: false,
     feed: [],
     //feedPagination: 0,
     isGettingPosts: false,
     getPostError: null,
 
+    someUser: null,
+    isGettingUser: false,
+    getUserError: null,
     isGettingPostCount: false,
     postCount: 0,
     isGettingFriendCount: false,
@@ -52,6 +95,26 @@ const reducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch(type){
+        case POST:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isPosting: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    content: ''
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isPosting: false,
+                })
+            });
+        case CHANGE_POST:
+            return {
+                ...state,
+                content: payload
+            };
         case GET_POSTS:
             return handle(state, action, {
                 start: prevState => ({
@@ -103,6 +166,26 @@ const reducer = (state = initialState, action) => {
                 finish: prevState => ({
                     ...prevState,
                     isGettingFriendCount: false
+                })
+            });
+        case GET_USER:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isGettingUser: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    someUser: payload.data.data,
+                    getUserError: null
+                }),
+                failure: prevState => ({
+                    ...prevState,
+                    getUserError: payload.response.data
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isGettingUser: false
                 })
             });
     default:

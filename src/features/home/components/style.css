@@ -2,6 +2,13 @@
     border-radius: 50%;
 }
 
+.ping {
+    float: left;
+    width: 100%;
+    border-radius: 10;
+    outline: none;
+}
+
 .stats, .statscount {
     font-size: 20px;
     text-align: center;

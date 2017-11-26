@@ -12,13 +12,12 @@ class UserFeed extends Component {
                         this.props.feeds.map((feed, index) => {
                             return(
                                 <Feed.Event key={index}>
-                                <Feed.Label image={image} />
+                                <Feed.Label image={feed.author.imageUrl} />
                                 <Feed.Content>
                                     <Feed.Summary>
-                                        <Feed.User content="Harold Roxas" />
-                                        <Feed.Date content="1h" />
+                                        <Feed.User content={feed.authorName} />
                                     </Feed.Summary>
-                                    <Feed.Extra images text content={feed.content} />
+                                    <Feed.Extra text content={feed.content} />
                                     <Feed.Meta>
                                         <Feed.Like>
                                             {feed.likeCount}
