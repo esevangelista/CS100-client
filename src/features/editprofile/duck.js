@@ -1,11 +1,13 @@
-import { handle } from 'redux-pack';
-import * as Api from '../../api';
-import profpic from '../../assets/profpics/defaultLul.jpg';
+// Action Types
+// const FEATURE = 'DOMAIN/FEATURE';
+// Example: const LOGIN = 'AUTH/LOGIN';
 
-const FORMCHANGE = 'SIGNUP/FORM_CHANGE';
-const RESETFORM = 'SIGNUP/FORM_RESET';
-const UPLOADPICTURE = 'SIGNUP/UPLOAD_PICTURE';
-const SIGNUP = '/SIGNUP/SIGNUP';
+const defaultPicture = 'routeToDefPic';
+
+const FORMCHANGE = 'FORM_CHANGE';
+const RESETFORM = 'FORM_RESET';
+const UPLOADPICTURE = 'UPLOAD_PICTURE';
+const SUBMITFORM = 'FORM_SUBMIT';
 
 export const handleFormChange = (name, value) => {
     return {
@@ -19,25 +21,30 @@ export const handleFormChange = (name, value) => {
 
 export const handleResetForm = () => {
     return {
-        type: RESETFORM
+        type: RESETFORM,
+        payload: {
+            
+        }
     }
 }
 
-export const handleUploadPicture = file => {
+export const handleFileUpload = (name, value) => {
     return {
         type: UPLOADPICTURE,
-        payload: file
-    };
-};
+        payload: {
+            name,
+            value
+        }
+    }
+}
 
-export const signup = credentials => {
-  return dispatch => {
-    return dispatch({
-      type: SIGNUP,
-      promise: Api.signup(credentials)
-    });
-  };
-};
+export const handleSubmitForm = () => {
+    return{ 
+        type: SUBMITFORM,
+        payload: {
+        }
+    }
+}
 
 // Initial State
 const initialState = {
@@ -50,30 +57,16 @@ const initialState = {
         email: "",
         about: "",
         password: "",
-        repassword: ""
-    },
-    isSigningUp: false,
-    //imagePath: null
+        repassword: "",
+        image: "",
+        currentImage: defaultPicture,
+    }
 }
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
+    console.log("EDIT: " + state);
     switch (type) {
-        case SIGNUP:
-            return handle(state, action, {
-                start: prevState => ({
-                    ...prevState,
-                    isSigningUp: true
-                }),
-                success: prevState => ({
-                    ...prevState,
-                    form: initialState.form
-                }),
-                finish: prevState => ({
-                    ...prevState,
-                    isSigningUp: false
-                })
-            })
         case FORMCHANGE:
         return {
             ...state,
@@ -89,17 +82,21 @@ const reducer = (state = initialState, action) => {
                     firstName: "",
                     middleName: "",
                     lastName: "",
+                    name: "",
                     email: "",
                     about: "",
                     password: "",
                     repassword: ""
                 }
             }
-        // case UPLOADPICTURE:
-        //     return {
-        //         ...state,
-        //         imagePath: payload.name
-        //     }
+        case UPLOADPICTURE:
+            return {
+                ...state,
+                form: {
+                    [payload.name]: payload.value,
+                }
+            }
+
         default:
             return state;
     }
