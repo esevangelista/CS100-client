@@ -4,36 +4,48 @@ import { handle } from 'redux-pack';
 //Action Types
 const GET_POSTS = 'HOME/GET_POSTS';
 const GET_POSTCOUNT = 'HOME/GET_POSTCOUNT';
+const GET_FRIENDCOUNT = 'HOME/GET_FRIENDCOUNT'
 const POST = 'HOME/POST';
 
 //Action Creators
-export const getPosts = page => {
+export const getPosts = () => {
     return dispatch => {
         return dispatch({
             type: GET_POSTS,
-            promise: Api.getPosts(page)
+            promise: Api.getPosts()
         });
     };
 };
 
-export const getPostCount = id => {
+export const getPostCount = () => {
     return dispatch => {
         return dispatch({
             type: GET_POSTCOUNT,
-            promise: Api.getPostCount(id)
-        })
-    }
-}
+            promise: Api.getPostCount()
+        });
+    };
+};
+
+export const getFriendCount = () => {
+    return dispatch => {
+        return dispatch({
+            type: GET_FRIENDCOUNT,
+            promise: Api.getFriendCount()
+        });
+    };
+};
 
 //Initial State
 const initialState = {
     feed: [],
-    feedPagination: 0,
+    //feedPagination: 0,
     isGettingPosts: false,
     getPostError: null,
 
     isGettingPostCount: false,
-    postCount: 0
+    postCount: 0,
+    isGettingFriendCount: false,
+    friendCount: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -48,8 +60,8 @@ const reducer = (state = initialState, action) => {
                 }),
                 success: prevState => ({
                     ...prevState,
-                    feed: [...state.feed, ...payload.data.data],
-                    feedPagination: state.feedPagination + 1,
+                    feed: [...payload.data.data],
+                    //feedPagination: state.feedPagination + 1,
                     getPostError: null
                 }),
                 failure: prevState => ({
@@ -75,6 +87,22 @@ const reducer = (state = initialState, action) => {
                 finish: prevState => ({
                     ...prevState,
                     isGettingPostCount: false
+                })
+            });
+
+        case GET_FRIENDCOUNT:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isGettingFriendCount: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    friendCount: payload.data.data
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isGettingFriendCount: false
                 })
             });
     default:

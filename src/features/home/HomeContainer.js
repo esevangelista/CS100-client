@@ -1,30 +1,32 @@
 import { connect } from 'react-redux';
 import Home from './Home';
 
-import { getPosts, getPostCount } from './duck';
+import { getPosts, getPostCount, getFriendCount } from './duck';
 
 const mapStateToProps = state => {
     const { user } = state.auth;
-    const { isGettingPosts, getPostError, feed, feedPagination } = state.home;
-    const { activeTab } = state.navbar;
+    const { isGettingPosts, getPostError, feed, postCount, friendCount } = state.home;
 
     return {
         user,
         isGettingPosts,
         getPostError,
         feed,
-        feedPagination,
-        activeTab
+        postCount,
+        friendCount
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleGetPosts: page => {
-            dispatch(getPosts(page));
+        handleGetPosts: () => {
+            dispatch(getPosts());
         },
         handleGetPostCount: () => {
             dispatch(getPostCount());
+        },
+        handleGetFriendCount: () => {
+            dispatch(getFriendCount());
         }
     };
 };

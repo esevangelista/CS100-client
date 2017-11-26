@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Signup from './Signup';
-import { handleFormChange, handleResetForm, handleUploadPicture, handleSubmitForm, signup } from './duck';
+import { handleFormChange, handleResetForm, handleUploadPicture, signup } from './duck';
 
 
 const mapStateToProps = state => {
@@ -19,11 +19,8 @@ const mapDispatchToProps = dispatch => {
         handleResetForm: () => {
             dispatch(handleResetForm())
         },
-        handleUploadPicture: (name, value) => {
-            dispatch(handleUploadPicture(name, value))
-        },
-        handleSubmitForm: () => {
-            dispatch(handleSubmitForm())
+        handleUploadPicture: file => {
+            dispatch(handleUploadPicture(file))
         },
         handleSignUp: credentials => {
             dispatch(signup(credentials))

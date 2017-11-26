@@ -5,43 +5,46 @@ import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } f
 
 class Signup extends Component {
 
-  handleFormChange = (e) => {
+  handleFormChange = e => {
     this.props.handleFormChange(e.target.name, e.target.value);
   }
 
-  handleResetForm = (e) => {
+  handleResetForm = e => {
     this.props.handleResetForm();
   }
 
-  handleUploadPicture = (e) => {
-    this.props.handleResetForm();
+  handleUploadPicture = e => {
+    this.props.handleUploadPicture(e.target.files[0]);
   }
 
-  handleSubmitForm = (e) => {
+  handleSubmitForm = e => {
     const validateEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-    if(
-      this.props.form.firstName === "" ||
-      this.props.form.middleName === "" ||
-      this.props.form.lastName === "" ||
-      this.props.form.email === "" ||
-      this.props.form.password === "" ||
-      this.props.form.repassword === "" ){
-        alert("All fields must be filled.");
-    }
-
-    else if (!validateEmail.test(this.props.form.email)){
+    e.preventDefault();
+    if (!validateEmail.test(this.props.form.email)){
       alert("Please enter a valid email.");
     }
 
     else if (this.props.form.password !== this.props.form.repassword){
       alert("Passwords don't match.");
+
+    }else{
+      const formObj = {
+        name: this.props.form.name,
+        email: this.props.form.email,
+        password: this.props.form.password,
+        about: this.props.form.about,
+        //imageUrl: this.props.imagePath
+      };
+      let credentials = new FormData();
+
+      Object.keys(formObj).forEach(key => credentials.append(key, formObj[key]));
+
+      this.props.handleSignUp(credentials);
     }
   }
 
   render(){
-    const { name, email, password, about, imageUrl } = this.props.form;
-
     return (
       <Grid 
         centered 
@@ -64,13 +67,10 @@ class Signup extends Component {
             color='teal'
             textAlign='center'
           >
-          <a href='/'style={{color: "teal"}}>Social Media App</a>
+          <a href='/'style={{color: "teal"}}>Ping Pong</a>
         </Header>
           <Segment>
-          <Form onSubmit={e => {
-            e.preventDefault();
-            this.props.handleSignUp({name, email, password, about, imageUrl});
-          }}>
+          <Form onSubmit={this.handleSubmitForm}>
             <Form.Group widths='equal'> 
               <Form.Input 
                 label='First name' 
@@ -82,9 +82,9 @@ class Signup extends Component {
               <Form.Input
                 label='Middle Name'
                 placeholder='Middle Name'
+                onChange={this.handleFormChange}
                 name='middleName' 
                 value={this.props.form.middleName}
-                onChange={this.handleFormChange}
               />
               <Form.Input
                 label='Last Name'
@@ -116,9 +116,9 @@ class Signup extends Component {
             <Form.Field >
               <label>Retype Password</label>
               <input 
+                type='password'
                 placeholder='Retype Password' 
                 name='repassword'
-                type='password'
                 value={this.props.form.repassword}
                 onChange={this.handleFormChange}
               />
@@ -136,12 +136,20 @@ class Signup extends Component {
             <Button 
               color='teal' 
               type='submit'
-              onClick={this.handleSubmitForm}
+              disabled={
+                !(this.props.form.firstName &&
+                  this.props.form.middleName &&
+                  this.props.form.lastName &&
+                  this.props.form.email &&
+                  this.props.form.password &&
+                  this.props.form.repassword
+                ) ? true : false
+              }
             >
               Submit
             </Button>
             <Button 
-              type='submit'
+              type='reset'
               onClick={this.handleResetForm}
             >
               Clear Fields
@@ -153,17 +161,17 @@ class Signup extends Component {
           </Message>
         </Grid.Column>
         <Grid.Column>
-          <Card>
-            <Image src={imageUrl}/>
+          {/* <Card>
+            <Image src={this.props.form.imageUrl}/>
             <Card.Content extra>
               <div>
-                <label for="hidden-new-file" class="ui icon button">
+                <label htmlFor="hidden-new-file" className="ui icon button">
                   Upload Photo
                 </label>
-                  <input type="file" id="hidden-new-file" style={{display: "none"}}/> 
+                <input type="file" name="imagePath" id="hidden-new-file" onChange={this.handleUploadPicture} style={{display: "none"}}/> 
               </div>
             </Card.Content>
-          </Card>
+          </Card> */}
         </Grid.Column>
       </Grid>
     );  
