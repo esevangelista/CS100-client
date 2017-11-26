@@ -24,7 +24,7 @@ class Home extends Component {
                         <UserProfile user={this.props.user}/>
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <UserPost image={this.props.user.imageUrl}/>
+                        <UserPost image={this.props.user.imageUrl} />
                         {this.props.getPostError ? (
                             <Message 
                                 content={this.props.getPostError.message}
@@ -32,7 +32,6 @@ class Home extends Component {
                         ) : (
                             <UserFeed feeds={this.props.feed}/>
                         )}
-                        {/* <UserFriendRequest /> */}
                     </Grid.Column>
                     <Grid.Column width={4}>
                         <UserSuggested />

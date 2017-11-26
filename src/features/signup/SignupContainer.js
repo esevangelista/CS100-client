@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Signup from './Signup';
-import { handleFormChange, handleResetForm, handleUploadPicture, handleSubmitForm } from './duck';
+import { handleFormChange, handleResetForm, handleUploadPicture, handleSubmitForm, signup } from './duck';
 
 
 const mapStateToProps = state => {
@@ -24,11 +24,12 @@ const mapDispatchToProps = dispatch => {
         },
         handleSubmitForm: () => {
             dispatch(handleSubmitForm())
+        },
+        handleSignUp: credentials => {
+            dispatch(signup(credentials))
         }
     }
 };
 
-// Returns a function
 const SignupContainer = connect(mapStateToProps, mapDispatchToProps)(Signup);
-
 export default SignupContainer;

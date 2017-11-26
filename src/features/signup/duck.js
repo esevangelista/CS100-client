@@ -1,23 +1,12 @@
-// Action Types
-// const FEATURE = 'DOMAIN/FEATURE';
-// Example: const LOGIN = 'AUTH/LOGIN';
+import { handle } from 'redux-pack';
+import * as Api from '../../api';
+import profpic from '../../assets/profpics/defaultLul.jpg';
 
-const FORMCHANGE = 'FORM_CHANGE';
-const RESETFORM = 'FORM_RESET';
-const UPLOADPICTURE = 'UPLOAD_PICTURE';
-const SUBMITFORM = 'FORM_SUBMIT';
-
-// Action Creators
-// Examples:
-// Action Creators with redux-pack and thunk
-// export const login = credentials => {
-//   return dispatch => { // dispatch provided by thunk middleware
-//     return dispatch({
-//       type: LOGIN,
-//       promise: Api.Login(credentials) // with redux-pack
-//     });
-//   }
-// };
+const FORMCHANGE = 'SIGNUP/FORM_CHANGE';
+const RESETFORM = 'SIGNUP/FORM_RESET';
+const UPLOADPICTURE = 'SIGNUP/UPLOAD_PICTURE';
+const SUBMITFORM = 'SIGNUP/FORM_SUBMIT';
+const SIGNUP = '/SIGNUP/SIGNUP';
 
 export const handleFormChange = (name, value) => {
     return {
@@ -31,10 +20,7 @@ export const handleFormChange = (name, value) => {
 
 export const handleResetForm = () => {
     return {
-        type: RESETFORM,
-        payload: {
-            
-        }
+        type: RESETFORM
     }
 }
 
@@ -50,11 +36,18 @@ export const handleUploadPicture = (name, value) => {
 
 export const handleSubmitForm = () => {
     return{ 
-        type: SUBMITFORM,
-        payload: {
-        }
+        type: SUBMITFORM
     }
 }
+
+export const signup = credentials => {
+  return dispatch => {
+    return dispatch({
+      type: SIGNUP,
+      promise: Api.signup(credentials)
+    });
+  };
+};
 
 // Initial State
 const initialState = {
@@ -63,19 +56,19 @@ const initialState = {
         firstName: "",
         middleName: "",
         lastName: "",
-        fullName: "",
+        name: "",
         email: "",
         about: "",
         password: "",
         repassword: "",
-        pictureLocation: ""
+        imageUrl: profpic
     }
 
 }
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
-    console.log(state);
+
     switch (type) {
         case FORMCHANGE:
         return {
@@ -83,7 +76,7 @@ const reducer = (state = initialState, action) => {
             form: {
                 ...state.form,
                 [payload.name]: payload.value,
-                fullName: state.form.firstName + " " + state.form.middleName + " " + state.form.lastName,
+                name: state.form.firstName + " " + state.form.middleName + " " + state.form.lastName,
             }
         }
         case RESETFORM:
@@ -93,6 +86,7 @@ const reducer = (state = initialState, action) => {
                     middleName: "",
                     lastName: "",
                     email: "",
+                    about: "",
                     password: "",
                     repassword: ""
                 }
