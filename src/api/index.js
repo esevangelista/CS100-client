@@ -7,3 +7,6 @@
 
 export * from './auth';
 export * from './navbar';
+export * from './post';
+export * from './signup';
+

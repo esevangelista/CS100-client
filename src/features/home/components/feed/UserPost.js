@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { Segment, Form, Image, Icon, Button } from 'semantic-ui-react';
-import image from '../../../../assets/profpics/somepicture.jpg';
 
 import '../style.css';
 
-const UserPost = () => (
+const UserPost = ({image}) => (
     <Segment>
         <Form.Group>
             <Image className="userimg" floated="left" size="mini" src={image} />

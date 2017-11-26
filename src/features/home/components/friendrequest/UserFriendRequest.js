@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 
-import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } from 'semantic-ui-react';
+import { Grid, Button, Segment, Card, Image } from 'semantic-ui-react';
 
-import UserProfile from './components/user/UserProfile';
-import UserPost from './components/feed/UserPost';
-import UserFeed from './components/feed/UserFeed';
-import UserSuggested from './components/suggested/UserSuggested';
-
-import profpic from '../../assets/profpics/defaultLul.jpg'
-
-import './style.css';
+import profpic from '../../../../assets/profpics/defaultLul.jpg';
 
 class FriendRequest extends Component {
     render() {

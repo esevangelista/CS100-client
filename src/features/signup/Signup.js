@@ -1,32 +1,24 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } from 'semantic-ui-react'
-import profpic from '../../assets/profpics/defaultLul.jpg';
+
 
 class Signup extends Component {
 
   handleFormChange = (e) => {
     this.props.handleFormChange(e.target.name, e.target.value);
-
   }
 
   handleResetForm = (e) => {
-
     this.props.handleResetForm();
-
   }
 
   handleUploadPicture = (e) => {
-
     this.props.handleResetForm();
-
   }
 
   handleSubmitForm = (e) => {
-
-    const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    console.log(this.props.form.firstName);
-
+    const validateEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
     if(
       this.props.form.firstName === "" ||
@@ -45,10 +37,11 @@ class Signup extends Component {
     else if (this.props.form.password !== this.props.form.repassword){
       alert("Passwords don't match.");
     }
-
   }
 
   render(){
+    const { name, email, password, about, imageUrl } = this.props.form;
+
     return (
       <Grid 
         centered 
@@ -74,7 +67,10 @@ class Signup extends Component {
           <a href='/'style={{color: "teal"}}>Social Media App</a>
         </Header>
           <Segment>
-          <Form>
+          <Form onSubmit={e => {
+            e.preventDefault();
+            this.props.handleSignUp({name, email, password, about, imageUrl});
+          }}>
             <Form.Group widths='equal'> 
               <Form.Input 
                 label='First name' 
@@ -156,10 +152,9 @@ class Signup extends Component {
             Already have an account? <Link to='/login'>Log in</Link>
           </Message>
         </Grid.Column>
-        <Grid.Column
-        >
+        <Grid.Column>
           <Card>
-            <Image src={profpic}/>
+            <Image src={imageUrl}/>
             <Card.Content extra>
               <div>
                 <label for="hidden-new-file" class="ui icon button">

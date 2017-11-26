@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Image } from 'semantic-ui-react';
-import image from '../../../../assets/profpics/somepicture.jpg';
 
 import '../style.css'
 
@@ -10,9 +9,9 @@ class UserProfile extends Component {
         return(
             <Card centered>
                 <Card.Content>
-                    <Image as={Link} to='/profile' circular floated="left" size="tiny" src={image} />
+                    <Image as={Link} to='/profile' circular floated="left" size="tiny" src={this.props.user.imageUrl} />
                     <Card.Header textAlign="center" style={{"font-size": 25, "margin-top": 20}}>
-                        Harold Roxas
+                        {this.props.user.name}
                     </Card.Header>
                 </Card.Content>
                 <Card.Content extra>
@@ -24,13 +23,13 @@ class UserProfile extends Component {
                             Friends
                         </Card.Description>
                     </div>
-                    <div className="stats">
-                        <Card.Meta className="postCount">
+                    <div className="statscount">
+                        <Card.Description className="postCount">
                             200
-                        </Card.Meta>
-                        <Card.Meta>
+                        </Card.Description>
+                        <Card.Description>
                             150
-                        </Card.Meta>
+                        </Card.Description>
                     </div>
                 </Card.Content>
             </Card>
