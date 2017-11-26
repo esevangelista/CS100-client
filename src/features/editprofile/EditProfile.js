@@ -28,7 +28,7 @@ class EditProfile extends Component {
             renewpassword: "",
             about: about,
         }
-        
+    
         this.handleClick = this.handleClick.bind(this);
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handleResetForm = this.handleResetForm.bind(this);
@@ -203,7 +203,7 @@ class EditProfile extends Component {
                     </Accordion>
                     <Segment>
                         <Form>
-                        <label><strong>Enter old password to save changes:</strong></label>
+                        <label><strong>Enter old password to save changes</strong></label>
                         <br />
                         <Form.Input
                             width={12}

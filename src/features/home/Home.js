@@ -14,6 +14,8 @@ class Home extends Component {
 
     componentDidMount(){
         this.props.handleGetPosts();
+        this.props.handleGetPostCount();
+        this.props.handleGetFriendCount();
     }
 
     render(){
@@ -21,10 +23,10 @@ class Home extends Component {
             <div className="page">
                 <Grid columns={3} padded>
                     <Grid.Column width={4} style={{"margin-left": 40}}>
-                        <UserProfile user={this.props.user}/>
+                        <UserProfile user={this.props.user} postCount={this.props.postCount} friendCount={this.props.friendCount}/>
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <UserPost image={this.props.user.imageUrl}/>
+                        <UserPost image={this.props.user.imageUrl} />
                         {this.props.getPostError ? (
                             <Message 
                                 content={this.props.getPostError.message}
@@ -32,7 +34,6 @@ class Home extends Component {
                         ) : (
                             <UserFeed feeds={this.props.feed}/>
                         )}
-                        {/* <UserFriendRequest /> */}
                     </Grid.Column>
                     <Grid.Column width={4}>
                         <UserSuggested />

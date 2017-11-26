@@ -1,23 +1,11 @@
-// Action Types
-// const FEATURE = 'DOMAIN/FEATURE';
-// Example: const LOGIN = 'AUTH/LOGIN';
+import { handle } from 'redux-pack';
+import * as Api from '../../api';
+import profpic from '../../assets/profpics/defaultLul.jpg';
 
-const FORMCHANGE = 'FORM_CHANGE';
-const RESETFORM = 'FORM_RESET';
-const UPLOADPICTURE = 'UPLOAD_PICTURE';
-const SUBMITFORM = 'FORM_SUBMIT';
-
-// Action Creators
-// Examples:
-// Action Creators with redux-pack and thunk
-// export const login = credentials => {
-//   return dispatch => { // dispatch provided by thunk middleware
-//     return dispatch({
-//       type: LOGIN,
-//       promise: Api.Login(credentials) // with redux-pack
-//     });
-//   }
-// };
+const FORMCHANGE = 'SIGNUP/FORM_CHANGE';
+const RESETFORM = 'SIGNUP/FORM_RESET';
+const UPLOADPICTURE = 'SIGNUP/UPLOAD_PICTURE';
+const SIGNUP = '/SIGNUP/SIGNUP';
 
 export const handleFormChange = (name, value) => {
     return {
@@ -31,30 +19,25 @@ export const handleFormChange = (name, value) => {
 
 export const handleResetForm = () => {
     return {
-        type: RESETFORM,
-        payload: {
-            
-        }
+        type: RESETFORM
     }
 }
 
-export const handleUploadPicture = (name, value) => {
+export const handleUploadPicture = file => {
     return {
         type: UPLOADPICTURE,
-        payload: {
-            name,
-            value
-        }
-    }
-}
+        payload: file
+    };
+};
 
-export const handleSubmitForm = () => {
-    return{ 
-        type: SUBMITFORM,
-        payload: {
-        }
-    }
-}
+export const signup = credentials => {
+  return dispatch => {
+    return dispatch({
+      type: SIGNUP,
+      promise: Api.signup(credentials)
+    });
+  };
+};
 
 // Initial State
 const initialState = {
@@ -67,14 +50,30 @@ const initialState = {
         email: "",
         about: "",
         password: "",
-        repassword: "",
-        pictureLocation: ""
-    }
+        repassword: ""
+    },
+    isSigningUp: false,
+    //imagePath: null
 }
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
+        case SIGNUP:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isSigningUp: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    form: initialState.form
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isSigningUp: false
+                })
+            })
         case FORMCHANGE:
         return {
             ...state,
@@ -91,25 +90,16 @@ const reducer = (state = initialState, action) => {
                     middleName: "",
                     lastName: "",
                     email: "",
+                    about: "",
                     password: "",
                     repassword: ""
                 }
             }
-        case UPLOADPICTURE:
-            return {
-                ...state,
-                form: {
-                    [payload.name]: payload.value,
-                }
-            }
-        case SUBMITFORM:
-            console.log(state);
-            return {
-                ...state,
-                form: {
-                    [payload.name]: payload.value,
-                }
-            }
+        // case UPLOADPICTURE:
+        //     return {
+        //         ...state,
+        //         imagePath: payload.name
+        //     }
         default:
             return state;
     }

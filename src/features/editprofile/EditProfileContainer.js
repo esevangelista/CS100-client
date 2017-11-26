@@ -4,8 +4,7 @@ import { handleFormChange, handleResetForm, handleSubmitForm, handleFileUpload }
 
 
 const mapStateToProps = state => {
-    const { user } = state.auth
-
+    const { user } = state.auth;
     return {
         user
     }

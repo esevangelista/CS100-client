@@ -14,7 +14,7 @@ import SignUp from '../features/signup/SignupContainer';
 import Loading from '../features/auth/loader/Loading';
 import NavBar from '../features/navbar/NavBarContainer';
 import Home from '../features/home/HomeContainer';
-import Profile from '../features/profile/Profile';
+import Profile from '../features/profile/ProfileContainer';
 import EditProfile from '../features/editprofile/EditProfileContainer';
 
 class App extends Component {
@@ -35,7 +35,7 @@ class App extends Component {
           </Switch>
         ) : (
           <div>
-            <NavBar logout={this.props.handleLogout}/>
+            <NavBar logout={this.props.handleLogout} image={this.props.user.imageUrl}/>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/profile" component={Profile} />

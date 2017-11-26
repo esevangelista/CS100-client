@@ -1,18 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Dropdown, Input, Image, Icon, Header } from 'semantic-ui-react';
-import something from '../../assets/profpics/somepicture.jpg'
-
-const trigger = (
-    <div>
-        <Image avatar src={something} size='mini'/>
-    </div>
-)
-
 
 const NavBar = ({
     search,
     handleSearchChange,
+    handleTabChange,
+    handleGetSearch,
     logout,
     image,
 }) => (
@@ -36,7 +30,8 @@ const NavBar = ({
                 icon={<Icon
                         name = 'search'
                         link = 'true'
-                        // onClick = {}
+                        // as={Link} to='/search/:search'
+                        onClick = {handleGetSearch(search)}
                     />}
                 placeholder='Search Users'
                 value = {search}
@@ -46,7 +41,7 @@ const NavBar = ({
                 />
             </Menu.Item>
             <Menu.Item>
-                <Dropdown trigger={trigger} icon ={null}>
+                <Dropdown trigger={<Image avatar src={image} size='mini'/>} icon ={null}>
                     <Dropdown.Menu>
                         <Dropdown.Item as={Link} to='/profile'>
                             Profile

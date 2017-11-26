@@ -25,10 +25,10 @@ class UserProfile extends Component {
                     </div>
                     <div className="statscount">
                         <Card.Description className="postCount">
-                            200
+                            {this.props.postCount}
                         </Card.Description>
                         <Card.Description>
-                            150
+                            {this.props.friendCount}
                         </Card.Description>
                     </div>
                 </Card.Content>

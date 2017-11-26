@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export const getPosts = page => {
-    return axios.get('api/post', page);
+export const getPosts = () => {
+    return axios.get('/api/post');
 }
 
-export const getPostCount = id => {
-    return axios.get('api/postCount', id)
+export const getPostCount = () => {
+    return axios.get('/api/postCount')
 }
 
 export const post = () => {
-    return axios.post('api/post');
+    return axios.post('/api/post');
 }
