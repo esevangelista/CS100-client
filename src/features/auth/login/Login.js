@@ -26,7 +26,7 @@ const Login = ({
         </Header>
         <div class = 'white'> 
         Ping your stories, Pong your replies, and Pang the PingPongs you like.
-        <br/>Introducing, Ping Pong, your not so new social media site.
+        <br/>Introducing, Ping Pong, your not so new social media site
         </div>
       </Grid.Column>
       <Grid.Column style={{ maxWidth: 350 }}>

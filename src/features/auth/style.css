@@ -1,8 +1,10 @@
-.login-form {
+body > div,
+body > div > div,
+body > div > div > div.login-form {
   height: 100%;
-  background-image: url('../../assets/background/table.jpg');
+  background-image: url('../../assets/background/table.png');
   background-repeat: no-repeat;
-  /*background-size: 10%;*/
+  background-size: 100%;
 }
 
 .loader {
