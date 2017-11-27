@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 
 import { Segment, Feed, Icon } from 'semantic-ui-react';
 import UserPost from './UserPost';
+import CommentModal from '../CommentModal';
 
 class UserFeed extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            showComment: false
+        }
+    }
+
+    handleShowCommentModal = e => {
+        this.setState({showComment: true});
+    }
 
     render(){
         const { content, handleChangePost, handlePost} = this.props;
@@ -35,14 +46,15 @@ class UserFeed extends Component {
                                         </Feed.Like>
                                         <Feed.Like>
                                             {feed.comments.length}
-                                            <Icon name="comment" />
+                                            <Icon name="comment" onClick={this.handleShowCommentModal}/>
                                         </Feed.Like>
                                     </Feed.Meta>
                                 </Feed.Content>
                                 </Feed.Event>
                             )
                         })
-                    }   
+                    }
+                    {/* <CommentModal active={this.state.showComment}/>    */}
                 </Feed>
             </Segment>
         );

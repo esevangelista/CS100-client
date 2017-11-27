@@ -6,6 +6,8 @@ import profpic from '../../../../assets/profpics/defaultLul.jpg';
 
 class FriendRequest extends Component {
     render() {
+        const { requests, handleAcceptFriend } = this.props;
+
         return (
             <Segment>
                 <Grid
@@ -19,90 +21,33 @@ class FriendRequest extends Component {
                     <Grid.Column
                         width={8}   
                     >
-                        <Card>
-                            <Card.Content>
-                                <Image floated='right' size='mini' src={profpic} />
-                                <Card.Header>
-                                    Jefferson Basilio
-                                </Card.Header>
-                                <Card.Meta>
-                                    jcbasilio1@up.edu.ph
-                                    </Card.Meta>
-                                <Card.Description>
-                                    jeff.about
-                                </Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <div className='ui two buttons'>
-                                    <Button color='teal'>Approve</Button>
-                                    <Button>Decline</Button>
-                                </div>
-                            </Card.Content>
-                        </Card>
-                        <Card>
-                            <Card.Content>
-                                <Image floated='right' size='mini' src={profpic} />
-                                <Card.Header>
-                                    Erlen Evangelista
-                                </Card.Header>
-                                <Card.Meta>
-                                    esevangelista@up.edu.ph
-                                 </Card.Meta>
-                                <Card.Description>
-                                    erlen.about
-                                </Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <div className='ui two buttons'>
-                                    <Button color='teal'>Approve</Button>
-                                    <Button>Decline</Button>
-                                </div>
-                            </Card.Content>
-                        </Card>
-                    </Grid.Column>
-                    <Grid.Column
-                        width={8}
-                    >
-                        <Card>
-                            <Card.Content>
-                                <Image floated='right' size='mini' src={profpic} />
-                                <Card.Header>
-                                    Harold Roxas
-                                </Card.Header>
-                                <Card.Meta>
-                                    hproxa@up.edu.ph
-                                 </Card.Meta>
-                                <Card.Description>
-                                    harold.about
-                                </Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <div className='ui two buttons'>
-                                    <Button color='teal'>Approve</Button>
-                                    <Button>Decline</Button>
-                                </div>
-                            </Card.Content>
-                        </Card>
-                        <Card>
-                            <Card.Content>
-                                <Image floated='right' size='mini' src={profpic} />
-                                <Card.Header>
-                                    Jasper Sunga
-                                </Card.Header>
-                                <Card.Meta>
-                                    jrsunga@up.edu.ph
-                                 </Card.Meta>
-                                <Card.Description>
-                                    hasper.about
-                                </Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <div className='ui two buttons'>
-                                    <Button color='teal'>Approve</Button>
-                                    <Button>Decline</Button>
-                                </div>
-                            </Card.Content>
-                        </Card>
+                        {
+                            requests.map((request, index) => {
+                                return(
+                                <Card key={index}>
+                                    <Card.Content>
+                                        <Image floated='right' size='mini' src={request.imageUrl} />
+                                        <Card.Header>
+                                            {request.name}
+                                        </Card.Header>
+                                        <Card.Meta>
+                                            {request.email}
+                                            </Card.Meta>
+                                        <Card.Description>
+                                            {request.about}
+                                        </Card.Description>
+                                    </Card.Content>
+                                    <Card.Content extra>
+                                        <div className='ui two buttons'>
+                                            <Button color='teal' onClick={e => {handleAcceptFriend(request._id)}}>Approve</Button>
+                                            <Button>Decline</Button>
+                                        </div>
+                                    </Card.Content>
+                                </Card>
+                                )
+                            })
+                        }
+                        
                     </Grid.Column>
 
                 </Grid>

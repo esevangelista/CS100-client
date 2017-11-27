@@ -19,4 +19,4 @@ class ViewModal extends Component{
     }
 }
 
-export default CommentModal;
+export default ViewModal;

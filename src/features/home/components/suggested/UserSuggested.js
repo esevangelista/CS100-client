@@ -5,6 +5,8 @@ import image from '../../../../assets/profpics/defaultLul.jpg';
 
 class UserSuggested extends Component {
     render(){
+        const { suggestions, handleAddFriend } = this.props;
+
         return(
             <Card>
                 <Card.Content>
@@ -14,27 +16,19 @@ class UserSuggested extends Component {
                 </Card.Content>
                 <Card.Content>
                     <Feed>
-                        <Feed.Event>
-                            <Feed.Label image={image} />
-                            <Feed.Content>
-                                <Feed.User content="Jeff Basillio" />
-                            </Feed.Content>
-                            <Button basic color="teal" compact circular>Add Friend</Button>
-                        </Feed.Event>
-                        <Feed.Event>
-                            <Feed.Label image={image} />
-                            <Feed.Content>
-                                <Feed.User content="Erlen" />
-                            </Feed.Content>
-                            <Button basic color="teal" compact circular>Add Friend</Button>
-                        </Feed.Event>
-                        <Feed.Event>
-                            <Feed.Label image={image} />
-                            <Feed.Content>
-                                <Feed.User content="Hasper Sunga" />
-                            </Feed.Content>
-                            <Button basic color="teal" compact circular>Add Friend</Button>
-                        </Feed.Event>
+                            {
+                                suggestions.map((suggested, index) => {
+                                    return (
+                                        <Feed.Event key={index}>
+                                            <Feed.Label image={suggested.imageUrl} />
+                                            <Feed.Content>
+                                                <Feed.User content={suggested.name} />
+                                            </Feed.Content>
+                                            <Button basic color="teal" compact circular onClick={e => {handleAddFriend(suggested._id)}}>Add Friend</Button>
+                                        </Feed.Event>
+                                    )
+                                })
+                            }
                     </Feed>
                 </Card.Content>
             </Card>

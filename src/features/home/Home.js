@@ -15,6 +15,8 @@ class Home extends Component {
         this.props.handleGetPosts();
         this.props.handleGetPostCount();
         this.props.handleGetFriendCount();
+        this.props.handleGetSuggestedFriends();
+        this.props.handleGetFriendRequests();
     }
 
     render(){
@@ -27,11 +29,11 @@ class Home extends Component {
                     <Grid.Column width={7}>
                     <Switch>
                         <Route path="/" component={() => <UserFeed feeds={this.props.feeds}/>} />
-                        <Route path="/friendrequest" component={UserFriendRequest} />
+                        <Route path="/friendrequest" component={() => <UserFriendRequest requests={this.props.requests} handleAcceptFriend={this.props.handleAcceptFriend}/>} />
                     </Switch>
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <UserSuggested />
+                        <UserSuggested suggestions={this.props.suggested} handleAddFriend={this.props.handleAddFriend}/>
                     </Grid.Column>
                 </Grid>
             </div>

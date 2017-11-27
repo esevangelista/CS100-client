@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import Home from './Home';
 
-import { getPosts, getPostCount, getFriendCount } from './duck';
+import { getPosts, getPostCount, getFriendCount, getSuggestedFriends, addFriend, acceptFriend, getFriendRequests } from './duck';
 
 const mapStateToProps = state => {
     const { user } = state.auth;
-    const { postCount, friendCount, feeds } = state.home;
+    const { postCount, friendCount, feeds, suggested, requests } = state.home;
 
     return {
         user,
         postCount,
         friendCount,
-        feeds
+        feeds,
+        suggested,
+        requests
     };
 };
 
@@ -25,6 +27,18 @@ const mapDispatchToProps = dispatch => {
         },
         handleGetFriendCount: () => {
             dispatch(getFriendCount());
+        },
+        handleGetSuggestedFriends: () => {
+            dispatch(getSuggestedFriends())
+        },
+        handleAddFriend: id => {
+            dispatch(addFriend(id))
+        },
+        handleAcceptFriend: id => {
+            dispatch(acceptFriend(id))
+        },
+        handleGetFriendRequests: () => {
+            dispatch(getFriendRequests())
         }
     };
 };

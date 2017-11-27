@@ -8,6 +8,10 @@ const GET_FRIENDCOUNT = 'HOME/GET_FRIENDCOUNT'
 const POST = 'HOME/POST';
 const CHANGE_POST = 'HOME/CHANGE_POST';
 const LIKE_POST = 'HOME/LIKE_POST';
+const GET_SUGGESTED = 'HOME/GET_SUGGESTED';
+const ADD_FRIEND = 'HOME/ADD_FRIEND';
+const GET_FRIENDREQUEST = 'HOME/GET_FRIENDREQUEST';
+const ACCEPT_FRIEND = 'HOME/ACCEPT_FRIEND';
 
 //Action Creators
 export const getPosts = () => {
@@ -63,14 +67,53 @@ export const likePost = (id, action) => {
     };
 };
 
+export const getSuggestedFriends = () => {
+    return dispatch => {
+        return dispatch({
+            type: GET_SUGGESTED,
+            promise: Api.getSuggestedFriends()
+        });
+    };
+};
+
+export const addFriend = id => {
+    return dispatch => {
+        return dispatch({
+            type: ADD_FRIEND,
+            promise: Api.addFriend(id)
+        });
+    };
+};
+
+export const getFriendRequests = () => {
+    return dispatch => {
+        return dispatch({
+            type: GET_FRIENDREQUEST,
+            promise: Api.getFriendRequests()
+        })
+    }
+}
+
+export const acceptFriend = id => {
+    return dispatch => {
+        return dispatch({
+            type: ACCEPT_FRIEND,
+            promise: Api.acceptFriend(id)
+        });
+    };
+};
+
 //Initial State
 const initialState = {
     content: '',
     isPosting: false,
     feeds: [],
-    //feedPagination: 0,
     isGettingPosts: false,
     getPostError: null,
+    suggested: [],
+    isGettingSuggested: false,
+    requests: [],
+    isGettingRequests: false,
 
     isGettingPostCount: false,
     postCount: 0,
@@ -153,6 +196,36 @@ const reducer = (state = initialState, action) => {
                 finish: prevState => ({
                     ...prevState,
                     isGettingFriendCount: false
+                })
+            });
+        case GET_SUGGESTED:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isGettingSuggested: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    suggested: [...payload.data.data],
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isGettingSuggested: false
+                })
+            });
+        case GET_FRIENDREQUEST:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isGettingRequests: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    requests: [...payload.data.data],
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isGettingRequests: false
                 })
             });
     default:
