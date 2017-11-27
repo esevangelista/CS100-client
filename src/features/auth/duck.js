@@ -52,11 +52,8 @@ export const changePassword = password => {
 
 // Initial State
 const initialState = {
-  user2: {
-    name: "Hellooooo"
-  },
   user: null,
-  email: "hi",
+  email: "",
   password: "",
   isGettingSession: false,
   hasTriedLoggingIn: false,

@@ -13,27 +13,28 @@ class EditProfile extends Component {
         const firstName = names[0];
         const middleName = names[1];
         const lastName = names[2];
-        const email = this.props.user.email;
-        const oldpassword = this.props.user.password;
-        const about = this.props.user.about;
 
         this.state = {
             activeIndex: -1,
+
+
+            id: this.props.user._id,
             firstName: firstName,
             middleName: middleName,
             lastName: lastName,
-            email: email,
+            email: this.props.user.email,
             oldpassword: "",
             newpassword: "",
             renewpassword: "",
-            about: about,
+            about: this.props.user.about,
+            oldPasswordMatch: false,
         }
     
         this.handleClick = this.handleClick.bind(this);
         this.handleFormChange = this.handleFormChange.bind(this);
         this.handleResetForm = this.handleResetForm.bind(this);
         this.handleFileUpload = this.handleFileUpload.bind(this);
-        this.handleSubmitForm = this.handleSubmitForm.bind(this);
+        this.handleEditForm = this.handleEditForm.bind(this);
 
     }
 
@@ -43,11 +44,9 @@ class EditProfile extends Component {
         const newIndex = activeIndex === index ? -1 : index
         this.setState({ activeIndex: newIndex })
     }
-
     handleFormChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
-
     handleResetForm = (e) => {
         const names = this.props.user.name.split(" ");
         const firstName = names[0];
@@ -61,30 +60,46 @@ class EditProfile extends Component {
             middleName: middleName,
             lastName: lastName,
             email: email,
-            oldpassword: oldpassword,
+            oldpassword: "",
             newpassword: "",
             renewpassword: "",
             about: this.props.user.about,
         });
     }
-
     handleFileUpload = (e) => {
         this.props.handleFileUpload(e.target.name, e.target.files[0]);
     }
+    handleEditForm = (e) => {
 
-    handleSubmitForm = (e) => {
-       const validateEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        const id = this.state.id;
+        const password = this.state.oldpassword;
+        console.log(password);
+        this.props.handleVerify({password});
 
-       if (!validateEmail.test(this.state.email)){
-            console.log(this.state.newpassword);
-            alert("Please enter a valid email.");
+        if(!this.props.validOldPassword){
+            alert("Incorrect old password.");
         }
+        else {
+            const validateEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+            if (!validateEmail.test(this.state.email)){
+                alert("Please enter a valid email.");
+            }
+            else if(this.state.newpassword !== this.state.renewpassword){
+                alert("New passwords don't match");
+            }
+            else{
+                const formObj = {
+                    name: this.state.firstName + " " + this.state.middleName + " " + this.state.lastName,
+                    email: this.state.email,
+                    password: this.state.password,
+                    about: this.state.about,
+                    //imageUrl: this.props.imagePath
+                };
+                let credentials = new FormData();
 
-        else if(this.state.newpassword !== this.state.renewpassword){
-            alert("New passwords don't match");
-        }
-        else{
-            console.log();
+                Object.keys(formObj).forEach(key => credentials.append(key, formObj[key]));
+                this.props.handleEditForm(credentials);
+            }
         }
     }
 
@@ -208,6 +223,7 @@ class EditProfile extends Component {
                         <Form.Input
                             width={12}
                             placeholder='Type your Old Password'
+                            type='password'
                             name='oldpassword'
                             value={this.state.oldpassword}
                             onChange={this.handleFormChange}
@@ -216,7 +232,6 @@ class EditProfile extends Component {
                     </Segment>
                     <br />
                     <Button color='teal' type='submit' 
-                    onClick={this.handleSubmitForm}
                     disabled={
                         !((this.state.firstName &&
                         this.state.middleName &&
@@ -224,6 +239,7 @@ class EditProfile extends Component {
                         this.state.email &&
                         this.state.oldpassword
                         )) ? true : false    }
+                    onClick={this.handleEditForm}
                     >
                         Submit</Button>
                     <Button type='submit' onClick={this.handleResetForm}>Revert</Button>

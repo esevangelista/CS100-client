@@ -1,6 +1,9 @@
+import * as Api from '../../api';
+import { handle } from 'redux-pack';
 // Action Types
 // const FEATURE = 'DOMAIN/FEATURE';
 // Example: const LOGIN = 'AUTH/LOGIN';
+
 
 const defaultPicture = 'routeToDefPic';
 
@@ -8,93 +11,91 @@ const FORMCHANGE = 'FORM_CHANGE';
 const RESETFORM = 'FORM_RESET';
 const UPLOADPICTURE = 'UPLOAD_PICTURE';
 const SUBMITFORM = 'FORM_SUBMIT';
+const EDITPROFILE = 'EDIT_PROFILE';
+const VERIFYPASSWORD = 'VERIFY_PASSWORD';
+const RESETOLDPASSWORD = 'RESET_VALIDPASSWORD';
 
-export const handleFormChange = (name, value) => {
+export const verify = (credentials) => {
+  return dispatch => {
+    return dispatch({
+      type: VERIFYPASSWORD,
+      promise: Api.verifyPassword(credentials)
+    });
+  };
+};
+
+export const handleEditForm = (credentials) => {
+    return dispatch => {
+        return dispatch({
+            type: EDITPROFILE,
+            promise: Api.editprofile(credentials)
+        });
+    };
+};
+
+export const resetOldPassword = () => {
+
     return {
-        type: FORMCHANGE,
+        type: RESETOLDPASSWORD,
         payload: {
-            name,
-            value
-        }
-    }
-}
 
-export const handleResetForm = () => {
-    return {
-        type: RESETFORM,
-        payload: {
-            
-        }
-    }
-}
-
-export const handleFileUpload = (name, value) => {
-    return {
-        type: UPLOADPICTURE,
-        payload: {
-            name,
-            value
-        }
-    }
-}
-
-export const handleSubmitForm = () => {
-    return{ 
-        type: SUBMITFORM,
-        payload: {
         }
     }
 }
 
 // Initial State
 const initialState = {
-
-    form: {
-        firstName: "",
-        middleName: "",
-        lastName: "",
+    form:{
         name: "",
         email: "",
-        about: "",
         password: "",
-        repassword: "",
-        image: "",
-        currentImage: defaultPicture,
-    }
+        about: "",
+    },
+    validOldPassword: null
 }
 
 const reducer = (state = initialState, action) => {
     const { type, payload } = action;
-    console.log("EDIT: " + state);
     switch (type) {
-        case FORMCHANGE:
-        return {
-            ...state,
-            form: {
-                ...state.form,
-                [payload.name]: payload.value,
-                name: state.form.firstName + " " + state.form.middleName + " " + state.form.lastName,
-            }
-        }
-        case RESETFORM:
-            return {
-                form: { 
-                    firstName: "",
-                    middleName: "",
-                    lastName: "",
-                    name: "",
-                    email: "",
-                    about: "",
-                    password: "",
-                    repassword: ""
-                }
-            }
-        case UPLOADPICTURE:
+
+        case VERIFYPASSWORD:
+            return handle(state, action, {
+                start: prevState => ({
+                ...prevState,
+                }),
+                success: prevState => ({
+                ...prevState,
+                validOldPassword: true
+                }),
+                failure: prevState => ({
+                ...prevState,
+                validOldPassword: false,
+                }),
+                finish: prevState => ({
+                ...prevState,
+                })
+            })
+            
+        case EDITPROFILE:
+            return handle(state, action, {
+                start: prevState => ({
+                    ...prevState,
+                    isSigningUp: true
+                }),
+                success: prevState => ({
+                    ...prevState,
+                    form: payload.data.data,
+                }),
+                finish: prevState => ({
+                    ...prevState,
+                    isSigningUp: false
+                })
+            })
+
+        case RESETOLDPASSWORD:
             return {
                 ...state,
-                form: {
-                    [payload.name]: payload.value,
-                }
+                validOldPassword: false
             }
 
         default:

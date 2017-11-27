@@ -9,6 +9,7 @@ import navbar from './navbar/duck';
 const rootReducer = combineReducers({
   auth,
   fields,
+  editprofile,
   home,
   navbar
 });

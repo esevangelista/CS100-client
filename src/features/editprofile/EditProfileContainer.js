@@ -1,28 +1,27 @@
 import { connect } from 'react-redux';
 import EditProfile from './EditProfile';
-import { handleFormChange, handleResetForm, handleSubmitForm, handleFileUpload } from './duck';
+import { verify, handleEditForm, resetOldPassword } from './duck';
 
 
 const mapStateToProps = state => {
     const { user } = state.auth;
+    const { validOldPassword } = state.editprofile
     return {
-        user
+        user,
+        validOldPassword,
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleFormChange: (name, value) => {
-            dispatch(handleFormChange(name, value))
+        handleVerify: (credentials) => {
+            dispatch(verify(credentials))
         },
-        handleResetForm: () => {
-            dispatch(handleResetForm())
+        handleEditForm: (credentials) => {
+            dispatch(handleEditForm(credentials))
         },
-        handleFileUpload: (name, value) => {
-            dispatch(handleFileUpload(name, value))
-        },
-        handleSubmitForm: () => {
-            dispatch(handleSubmitForm())
+        resetOldPassword: () => {
+            dispatch(resetOldPassword())
         }
     }
 };

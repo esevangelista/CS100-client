@@ -3,3 +3,4 @@ export * from './post';
 export * from './signup';
 export * from './friends';
 export * from './navbar';
+export * from './editprofile';
