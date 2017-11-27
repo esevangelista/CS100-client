@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 
 import { Segment, Feed, Icon } from 'semantic-ui-react';
-import image from '../../../../assets/profpics/somepicture.jpg';
+import UserPost from './UserPost';
 
 class UserFeed extends Component {
+
     render(){
+        const { content, handleChangePost, handlePost} = this.props;
+
         return(
             <Segment>
+                <UserPost 
+                    image={this.props.user.imageUrl} 
+                    content={content}
+                    handleChangePost={handleChangePost}
+                    handlePost={handlePost}
+                />
                 <Feed>
                     {
                         this.props.feeds.map((feed, index) => {

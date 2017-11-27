@@ -7,7 +7,6 @@ const GET_POSTCOUNT = 'HOME/GET_POSTCOUNT';
 const GET_FRIENDCOUNT = 'HOME/GET_FRIENDCOUNT'
 const POST = 'HOME/POST';
 const CHANGE_POST = 'HOME/CHANGE_POST';
-const GET_USER = 'HOME/GET_USER';
 const LIKE_POST = 'HOME/LIKE_POST';
 
 //Action Creators
@@ -55,15 +54,6 @@ export const changePost = content => {
     }
 }
 
-export const getUser = id => {
-    return dispatch => {
-        return dispatch({
-            type: GET_USER,
-            promise: Api.getUser(id)
-        });
-    };
-};
-
 export const likePost = (id, action) => {
     return dispatch => {
         return dispatch({
@@ -77,14 +67,11 @@ export const likePost = (id, action) => {
 const initialState = {
     content: '',
     isPosting: false,
-    feed: [],
+    feeds: [],
     //feedPagination: 0,
     isGettingPosts: false,
     getPostError: null,
 
-    someUser: null,
-    isGettingUser: false,
-    getUserError: null,
     isGettingPostCount: false,
     postCount: 0,
     isGettingFriendCount: false,
@@ -123,7 +110,7 @@ const reducer = (state = initialState, action) => {
                 }),
                 success: prevState => ({
                     ...prevState,
-                    feed: [...payload.data.data],
+                    feeds: [...payload.data.data],
                     //feedPagination: state.feedPagination + 1,
                     getPostError: null
                 }),
@@ -166,26 +153,6 @@ const reducer = (state = initialState, action) => {
                 finish: prevState => ({
                     ...prevState,
                     isGettingFriendCount: false
-                })
-            });
-        case GET_USER:
-            return handle(state, action, {
-                start: prevState => ({
-                    ...prevState,
-                    isGettingUser: true
-                }),
-                success: prevState => ({
-                    ...prevState,
-                    someUser: payload.data.data,
-                    getUserError: null
-                }),
-                failure: prevState => ({
-                    ...prevState,
-                    getUserError: payload.response.data
-                }),
-                finish: prevState => ({
-                    ...prevState,
-                    isGettingUser: false
                 })
             });
     default:

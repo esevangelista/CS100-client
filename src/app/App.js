@@ -38,8 +38,8 @@ class App extends Component {
             <NavBar logout={this.props.handleLogout} image={this.props.user.imageUrl}/>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/editprofile" component={EditProfile} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/editprofile" component={EditProfile} />
               <Redirect to="/" />
             </Switch>
           </div>

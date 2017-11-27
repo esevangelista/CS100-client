@@ -5,12 +5,12 @@ import { getUserPosts, getFriends } from './duck';
 
 const mapStateToProps = state => {
     const { user } = state.auth;
-    const { getPostError, feed, getFriendError, friends } = state.profile;
+    const { getPostError, feeds, getFriendError, friends } = state.profile;
 
     return {
         user,
         getPostError,
-        feed,
+        feeds,
         getFriendError,
         friends
     };

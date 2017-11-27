@@ -14,7 +14,7 @@ const NavBar = ({
         <Menu.Item as={Link} to='/'> 
             <h4 style={{'color':'teal'}}>Home</h4>
         </Menu.Item>
-        <Menu.Item as={Link} to='/'>
+        <Menu.Item as={Link} to='/friendrequest'>
             <h4 style={{'color':'teal'}}>Friend Requests</h4>
         </Menu.Item>
         <Menu.Item as={Link} to='/' position = 'right'>

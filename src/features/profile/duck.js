@@ -27,7 +27,7 @@ export const getFriends = () => {
 
 //Initial State
 const initialState = {
-    feed: [],
+    feeds: [],
     friends: [],
     isGettingPosts: false,
     isGettingFriends: false,
@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
                 }),
                 success: prevState => ({
                     ...prevState,
-                    feed: [...payload.data.data],
+                    feeds: [...payload.data.data],
                     //feedPagination: state.feedPagination + 1,
                     getPostError: null
                 }),

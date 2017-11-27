@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Grid, Message } from 'semantic-ui-react';
 import ProfileInfo from './components/info/ProfileInfo';
-import UserFeed from '../home/components/feed/UserFeed';
+import UserFeed from '../home/components/feed/UserFeedContainer';
 import UserSuggested from '../home/components/suggested/UserSuggested';
 
 import './style.css';
@@ -30,9 +30,7 @@ class Profile extends Component {
                             />
                         ) : (
                             <UserFeed
-                                feeds={this.props.feed}
-                                handleGetUser={this.props.handleGetUser}
-                                someUser={this.props.someUser}
+                                feeds={this.props.feeds}
                             />
                         )}
                     </Grid.Column>
