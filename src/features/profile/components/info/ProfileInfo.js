@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
 import {Image, Card} from 'semantic-ui-react';
-import something from '../../../../assets/profpics/somepicture.jpg'
-
-const array = [something, something, something, something, something, something]
 
 class ProfileInfo extends Component{
 
     render(){
+        const { user, friends } = this.props;
+
         return (
             <div>
-                <Image src={this.props.user.imageUrl} size = 'large' circular/>
+                <Image src={user.imageUrl} size = 'large' circular/>
                 <br/>
                 <Card.Group itemsPerRow = {1} stackable>
                     <Card>
                         <Card.Content>
-                            <Card.Header>{this.props.user.name}</Card.Header>
+                            <Card.Header>{user.name}</Card.Header>
                             
-                            <Card.Description>{this.props.user.about}</Card.Description>
+                            <Card.Description>{user.about}</Card.Description>
                         </Card.Content>
                     </Card>
                     <Card>
                         <Card.Content>
                             <Card.Header>Friends</Card.Header>
                             
-                            <Card.Description textAlign="center">
+                            <Card.Description>
                                 {
-                                    array.map((image, index) => {
-                                        console.log('Here')
+                                    friends.map((friend) => {
                                         return(
-                                            <Image key = {index} src={image} size = 'tiny'/>
+                                            <Image key = {friend._id} src={friend.imageUrl} size = 'tiny'/>
                                         )
                                     })
                                 }
@@ -37,7 +35,7 @@ class ProfileInfo extends Component{
                     </Card>
                 </Card.Group>
             </div>
-            )
+        )
     }
 }
 

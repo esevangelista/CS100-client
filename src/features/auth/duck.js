@@ -131,7 +131,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         password: payload
-      }
+      };
 
   default:
     return state;

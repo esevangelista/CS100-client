@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Grid, Message } from 'semantic-ui-react';
 
 import UserProfile from './components/user/UserProfile';
-import UserPost from './components/feed/UserPost';
-import UserFeed from './components/feed/UserFeed';
+import UserFeed from './components/feed/UserFeedContainer';
 import UserSuggested from './components/suggested/UserSuggested';
 import UserFriendRequest from './components/friendrequest/UserFriendRequest';
 
@@ -16,6 +15,8 @@ class Home extends Component {
         this.props.handleGetPosts();
         this.props.handleGetPostCount();
         this.props.handleGetFriendCount();
+        this.props.handleGetSuggestedFriends();
+        this.props.handleGetFriendRequests();
     }
 
     render(){
@@ -26,17 +27,13 @@ class Home extends Component {
                         <UserProfile user={this.props.user} postCount={this.props.postCount} friendCount={this.props.friendCount}/>
                     </Grid.Column>
                     <Grid.Column width={7}>
-                        <UserPost image={this.props.user.imageUrl} />
-                        {this.props.getPostError ? (
-                            <Message 
-                                content={this.props.getPostError.message}
-                            />
-                        ) : (
-                            <UserFeed feeds={this.props.feed}/>
-                        )}
+                    <Switch>
+                        <Route path="/" component={() => <UserFeed feeds={this.props.feeds}/>} />
+                        <Route path="/friendrequest" component={() => <UserFriendRequest requests={this.props.requests} handleAcceptFriend={this.props.handleAcceptFriend}/>} />
+                    </Switch>
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <UserSuggested />
+                        <UserSuggested suggestions={this.props.suggested} handleAddFriend={this.props.handleAddFriend}/>
                     </Grid.Column>
                 </Grid>
             </div>

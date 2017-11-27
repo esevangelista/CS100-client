@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } from 'semantic-ui-react'
+import { Header, Grid, Button, Form, Segment, Card, Image, TextArea, Message } from 'semantic-ui-react';
+
+import something from '../../assets/profpics/defaultLul.jpg'
 
 
 class Signup extends Component {
@@ -67,7 +69,7 @@ class Signup extends Component {
             color='teal'
             textAlign='center'
           >
-          <a href='/'style={{color: "teal"}}>Ping Pong</a>
+          <a href='/'className="white">Ping Pong</a>
         </Header>
           <Segment>
           <Form onSubmit={this.handleSubmitForm}>
@@ -161,17 +163,17 @@ class Signup extends Component {
           </Message>
         </Grid.Column>
         <Grid.Column>
-          {/* <Card>
-            <Image src={this.props.form.imageUrl}/>
+          <Card>
+            <Image src={something}/>
             <Card.Content extra>
               <div>
                 <label htmlFor="hidden-new-file" className="ui icon button">
                   Upload Photo
                 </label>
-                <input type="file" name="imagePath" id="hidden-new-file" onChange={this.handleUploadPicture} style={{display: "none"}}/> 
+                <input type="file" name="imagePath" id="hidden-new-file" style={{display: "none"}}/> 
               </div>
             </Card.Content>
-          </Card> */}
+          </Card>
         </Grid.Column>
       </Grid>
     );  

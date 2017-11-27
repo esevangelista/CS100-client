@@ -204,7 +204,7 @@ class EditProfile extends Component {
                         <Accordion.Content active={activeIndex === 3}>
                             <Form>
                                 <Form.Field>
-                                    <TextArea   
+                                    <TextArea
                                         autoHeight
                                         style={{minHeight: 100}}
                                         placeholder='About'
